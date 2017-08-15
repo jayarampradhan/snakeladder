@@ -1,0 +1,37 @@
+### Java template
+.idea
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+*.iml
+# Created by .ignore support plugin (hsz.mobi)
+
+.DS_Store
+
+**/target
+
+build/*
+
+*/*.lock
+
+*.lock
+
+*.jar
+*/*.jar
+
+#eclipse gitignore
+*.project
+*.settings/
+*/*.project
+*/*.settings/
+*.classpath
+*/*.classpath
+*/*bin
+
+*/app/build/

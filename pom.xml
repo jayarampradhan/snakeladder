@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.poc</groupId>
+    <artifactId>snake-ladder-more</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>Ludo Snake Ladder</name>
+    <description>Ludo Snake Ladder and more.</description>
+    <packaging>jar</packaging>
+
+
+    <properties>
+        <m2e.apt.activation>jdt_apt</m2e.apt.activation>
+        <main.basedir>${basedir}</main.basedir>
+        <maven.build.timestamp.format>dd-MM-yyyy HH:mm:ss</maven.build.timestamp.format>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.deploy.skip>true</maven.deploy.skip>
+
+        <project.base.name>snakeladder</project.base.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.organization>Poc</project.organization>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <timestamp>${maven.build.timestamp}</timestamp>
+
+        <!-- plugins versions -->
+        <m.compiler.p.version>3.5.1</m.compiler.p.version>
+        <m.jar.p.version>3.0.2</m.jar.p.version>
+        <m.javadoc.p.version>2.10.4</m.javadoc.p.version>
+        <m.source.p.version>3.0.1</m.source.p.version>
+        <m.surefire.p.version>2.19.1</m.surefire.p.version>
+        <m.versions.p.version>2.3</m.versions.p.version>
+
+        <!-- Testing dependencies -->
+        <assertj.version>1.0.0m1</assertj.version>
+        <junit.version>4.12</junit.version>
+        <mockito.version>2.0.42-beta</mockito.version>
+
+        <!-- dependencies -->
+        <janino.version>3.0.7</janino.version>
+        <logback.version>1.2.3</logback.version>
+        <slf4j.version>1.7.25</slf4j.version>
+
+    </properties>
+
+    <dependencies>
+        <!-- Testing Dependency -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core-java8</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Testing Dependency end-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>${janino.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${m.compiler.p.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${m.surefire.p.version}</version>
+                <configuration>
+                    <parallel>classes</parallel>
+                    <threadCount>10</threadCount>
+                    <argLine>${surefireArgLine}</argLine>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>4</forkCount>
+                    <!--<skipTests>true</skipTests>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${m.javadoc.p.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${m.source.p.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <codification>${project.build.sourceEncoding}</codification>
+                            <encodedKey>${project.name}</encodedKey>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
